@@ -11,6 +11,7 @@
 
         <div class="modal-body">
           <slot name="body">
+            <p>Nombre de matchs nuls : {{ties}}</p>
             <p>Points de {{players.player_1.name}} : {{players.player_1.points}}</p>
             <p>Points de {{players.player_2.name}} : {{players.player_2.points}}</p>
           </slot>
@@ -34,7 +35,8 @@ export default {
   name: "winModal",
   props:{
     winner: String,
-    players: Object
+    players: Object,
+    ties: null,
   }
 }
 </script>

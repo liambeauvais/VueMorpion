@@ -28,4 +28,9 @@ export default {
   .morpion{
     border: 1px solid black;
   }
+  @media(max-width: 650px){
+    span{
+      font-size: 100px;
+    }
+  }
 </style>
