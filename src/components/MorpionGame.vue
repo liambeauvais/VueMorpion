@@ -13,13 +13,15 @@
            placeholder="Nom du joueur 2">
 
     <p class="player-turn" v-if="playersFilled">
-    <span v-if="player_turn">À {{players.player_1.name}} de jouer!</span>
-    <span v-if="!player_turn">À  {{players.player_2.name}} de jouer!</span>
+      <span v-if="player_turn">À {{ players.player_1.name }} de jouer!</span>
+      <span v-if="!player_turn">À  {{ players.player_2.name }} de jouer!</span>
     </p>
-    <div v-if="playersFilled" class="morpion-square">
-      <MorpionTile class="morpion-tile" v-for="(tile,index) of tiles" :key="index" @click="changeValue(index)"
-                   :value="tile"></MorpionTile>
-    </div>
+    <Transition>
+      <div v-if="playersFilled" class="morpion-square">
+        <MorpionTile class="morpion-tile" v-for="(tile,index) of tiles" :key="index" @click="changeValue(index)"
+                     :value="tile"></MorpionTile>
+      </div>
+    </Transition>
   </div>
   <win-modal v-on:close="replay" :ties="tieGamesCount" :players="players" :winner="winner" v-if="gameIsWon"></win-modal>
 </template>
@@ -101,8 +103,7 @@ export default {
           this.players.player_2.points++;
         }
         this.gameIsWon = true;
-      }
-      else{
+      } else {
         this.isTie();
       }
     },
@@ -165,7 +166,7 @@ input {
   height: 200px;
 }
 
-h1,p{
+h1, p {
   text-align: center;
 }
 
@@ -183,21 +184,30 @@ a {
   color: #42b983;
 }
 
-.player-turn{
+.player-turn {
   font-size: 20px;
   font-weight: bolder;
   font-style: italic;
 }
 
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 4.0s;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 
 
-
-@media (max-width: 650px){
-  .morpion-square{
+@media (max-width: 650px) {
+  .morpion-square {
     width: 304.8px;
     height: 304.8px;
   }
-  .morpion-tile{
+
+  .morpion-tile {
     width: 100px;
     height: 100px;
   }
