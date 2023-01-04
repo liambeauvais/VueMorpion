@@ -4,14 +4,18 @@
     <p>Les règles sont simples: le jeu se joue à deux, les joueurs devant "placer" un pion de sa couleur l'un après
       l'autre.</p>
     <p>Le gagnant est celui qui arrive à aligner 3 de ses jetons horizontalement, verticalement ou en diagonale.</p>
-    <h2 v-if="players.player_1.name">Bienvenue {{ player_1.name }}</h2>
+    <h2 v-if="players.player_1.name">Bienvenue {{ player_1.name }} (joue avec X)</h2>
     <input v-if="!players.player_1.name" @keyup.enter="definePlayerName(0)" v-model="player_1.name"
            placeholder="Nom du joueur 1">
     <hr>
-    <h2 v-if="players.player_2.name">Bienvenue {{ player_2.name }}</h2>
+    <h2 v-if="players.player_2.name">Bienvenue {{ player_2.name }} (joue avec O)</h2>
     <input v-if="!players.player_2.name" @keyup.enter="definePlayerName(1)" v-model="player_2.name"
            placeholder="Nom du joueur 2">
 
+    <p class="player-turn" v-if="playersFilled">
+    <span v-if="player_turn">À {{players.player_1.name}} de jouer!</span>
+    <span v-if="!player_turn">À  {{players.player_2.name}} de jouer!</span>
+    </p>
     <div v-if="playersFilled" class="morpion-square">
       <MorpionTile class="morpion-tile" v-for="(tile,index) of tiles" :key="index" @click="changeValue(index)"
                    :value="tile"></MorpionTile>
@@ -183,6 +187,14 @@ li {
 a {
   color: #42b983;
 }
+
+.player-turn{
+  font-size: 20px;
+  font-weight: bolder;
+  font-style: italic;
+}
+
+
 
 
 @media (max-width: 650px){
