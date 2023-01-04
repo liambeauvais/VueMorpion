@@ -70,8 +70,8 @@ export default {
     changeValue(index) {
       if (!this.tiles[index]) {
         this.tiles[index] = this.player_turn ? this.players.player_1.symbol : this.players.player_2.symbol;
+        this.isWin();
         this.player_turn = !this.player_turn;
-        this.isWin()
       }
     },
     definePlayerName(index) {
@@ -85,11 +85,6 @@ export default {
       }
     },
     isWin() {
-      console.log("coucou")
-      console.log(this.tiles[0])
-      console.log(this.tiles[1])
-      console.log(this.tiles[2])
-      console.log(this.tiles[0] === this.tiles[1])
       if (((this.tiles[0] === this.tiles[1] && this.tiles[1] === this.tiles[2]) && this.tiles[0])
           || ((this.tiles[0] === this.tiles[3] && this.tiles[3] === this.tiles[6]) && this.tiles[0])
           || ((this.tiles[0] === this.tiles[4] && this.tiles[4] === this.tiles[8]) && this.tiles[0])
